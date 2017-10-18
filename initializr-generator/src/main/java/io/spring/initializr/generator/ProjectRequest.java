@@ -22,17 +22,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.util.StringUtils;
+
 import io.spring.initializr.metadata.BillOfMaterials;
 import io.spring.initializr.metadata.DefaultMetadataElement;
 import io.spring.initializr.metadata.Dependency;
 import io.spring.initializr.metadata.InitializrMetadata;
+import io.spring.initializr.metadata.Plugin;
 import io.spring.initializr.metadata.Repository;
 import io.spring.initializr.metadata.Type;
 import io.spring.initializr.util.Version;
 import io.spring.initializr.util.VersionProperty;
-
-import org.springframework.beans.BeanWrapperImpl;
-import org.springframework.util.StringUtils;
 
 /**
  * A request to generate a project.
@@ -55,6 +56,8 @@ public class ProjectRequest extends BasicProjectRequest {
 	private final Map<String, BillOfMaterials> boms = new LinkedHashMap<>();
 
 	private final Map<String, Repository> repositories = new LinkedHashMap<>();
+
+	private final Map<String, Plugin> plugins = new LinkedHashMap<>();
 
 	private final BuildProperties buildProperties = new BuildProperties();
 
@@ -98,6 +101,10 @@ public class ProjectRequest extends BasicProjectRequest {
 
 	public Map<String, Repository> getRepositories() {
 		return repositories;
+	}
+
+	public Map<String, Plugin> getPlugins() {
+		return plugins;
 	}
 
 	/**
@@ -305,7 +312,8 @@ public class ProjectRequest extends BasicProjectRequest {
 				? "resolvedDependencies=" + resolvedDependencies + ", "
 				: "")
 				+ "boms=" + boms + ", " + "repositories="
-				+ repositories + ", " + "buildProperties="
+				+ repositories + ", " + "plugins="
+				+ plugins + "," + "buildProperties="
 				+ buildProperties + ", " + (facets != null
 				? "facets=" + facets + ", " : "")
 				+ (build != null ? "build=" + build : "") + "]";

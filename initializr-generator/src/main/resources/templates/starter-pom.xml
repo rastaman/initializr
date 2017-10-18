@@ -211,6 +211,10 @@
 				</dependencies>
 			</plugin>
 			{{/kotlin}}
+			{{#hasPlugins}}
+            {{#pluginValues}}
+			{{/pluginValues}}
+			{{/hasPlugins}}
 		</plugins>
 	</build>
 {{#hasRepositories}}
